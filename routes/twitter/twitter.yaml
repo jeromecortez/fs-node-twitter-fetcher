@@ -1,0 +1,61 @@
+components:
+  schemas:
+    Tweet:
+      type: object
+      properties:
+        id: 
+          type: string
+          description: Tweet ID
+        text:
+          type: string
+          description: Tweet content
+        author_id:
+          type: string
+          description: Twitter user ID
+        source:
+          type: string
+          description: Source of tweet
+    TweeterUser:
+      type: object
+      properties:
+        id: 
+          type: string
+          description: Twitter user ID
+        username:
+          type: string
+          description: Twitter handle
+        name:
+          type: string
+          description: Twitter Name
+        profile_image_url:
+          type: string
+          description: Twitter avatar image
+tags:
+  name: Tweeter
+  description: API to fetch tweets
+paths:
+  /tweets:
+    get:
+      tags: [Tweeter]
+      summary: Fetch tweets given a username
+      parameters:
+        - in: query
+          name: username
+          type: string
+          description: Twitter username to search
+      responses:
+        200:
+          description: Tweets fetched successfully
+          content:
+            application/json:
+              schema: object
+              items:
+                tweetData:
+                  type: array
+                  description: List of tweets
+                userData:
+                  type: object
+                  description: Twitter user data
+        404:
+          description: Twitter user not found
+        
